@@ -33,7 +33,7 @@
           operator:
             replicas: 1
           nodePort:
-            enabled: true
+            enabled: false
           ingressController:
             enabled: true
             loadbalancerMode: 'shared'

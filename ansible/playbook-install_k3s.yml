@@ -11,3 +11,4 @@
         - "k3s.{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}.sslip.io"
       flannel_backend: 'none'
       disable_network_policy: true
+      disable_something: 'traefik'

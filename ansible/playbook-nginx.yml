@@ -22,8 +22,8 @@
       # running this from vagrant fails, if we target localhost directly
       delegate_to: 'localhost'
       kubernetes.core.helm:
-        release_name: 'nginx'
         chart_ref: 'oci://registry-1.docker.io/bitnamicharts/nginx'
+        release_name: 'nginx'
         release_namespace: 'default'
         values:
           service:
@@ -68,15 +68,15 @@
       delay: 10
 
     - name: 'Wait for URL to be available'
+      delegate_to: 'localhost'
       ansible.builtin.uri:
         url: "http://nginx.{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}.sslip.io"
       register: result
       until: "result.status == 200"
       retries: 31
       delay: 10
-      delegate_to: 'localhost'
 
     - name: 'Output URL'
+      delegate_to: 'localhost'
       ansible.builtin.debug:
         msg: "You can access the Nginx deployment here: http://nginx.{{ hostvars[inventory_hostname]['ansible_default_ipv4']['address'] }}.sslip.io"
-      delegate_to: 'localhost'
